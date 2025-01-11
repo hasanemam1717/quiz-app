@@ -1,5 +1,6 @@
 import { Button } from "../components/ui/button";
 import {
+  completeQuiz,
   nextQuestion,
   previousQuestion,
 } from "../Redux/fetures/quiz/quizSlice";
@@ -17,6 +18,13 @@ const QuizControl = () => {
   const handlePrevQuestion = () => {
     disPatch(previousQuestion());
   };
+
+  const handleCompleteQuiz = () => {
+    disPatch(completeQuiz());
+  };
+
+  const isCompleteQuiz =
+    isAnswerSelect || currentQuestionIndex !== question.length - 1;
   return (
     <div className="flex justify-between">
       <Button
@@ -31,7 +39,9 @@ const QuizControl = () => {
         </Button>
       )}
       {currentQuestionIndex === question.length - 1 && (
-        <Button>Complete Quiz</Button>
+        <Button disabled={!isCompleteQuiz} onClick={handleCompleteQuiz}>
+          Complete Quiz
+        </Button>
       )}
     </div>
   );

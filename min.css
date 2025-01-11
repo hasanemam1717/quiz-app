@@ -1,0 +1,23 @@
+.t {
+  display: flex;
+  gap: 20px;
+}
+.L {
+  padding: 20px;
+  height: 120px;
+  width: 252px;
+  color: red;
+  background-color: green;
+  border-radius: 18px;
+  text-align: center;
+  align-items: center;
+}
+
+.L:hover {
+  background-color: blue;
+  color: azure;
+  cursor: pointer;
+}
+.M {
+  margin: auto;
+}

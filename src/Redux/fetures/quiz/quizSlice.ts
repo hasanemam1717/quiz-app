@@ -1,16 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { quizData } from "../../../Home/QuizData";
+import { quizData } from "../../../Home/quizData";
 
-interface TQuiz {
+export interface QuizData {
+    question: string;
+    options: string[];
+    correctAnswer: string;
+}
+
+export interface TQuizData {
     question: typeof quizData;
     currentQuestionIndex: number;
     userAnswers: (string | null)[];
     quizComplete: boolean
 
 }
+export type TQuiz = {
+    _id: string;
+    name: string;
+    description: string;
+    questions: QuizData[];
+    createdAt: Date;
+    updatedAt: Date;
+};
 
-const initialState: TQuiz = {
-    question: quizData,
+const initialState: TQuizData = {
+    question: [],
     currentQuestionIndex: 0,
     userAnswers: Array(quizData.length).fill(null),
     quizComplete: false,
@@ -23,11 +37,11 @@ export const quizSlice = createSlice({
     reducers: {
         setAnswer: (state, action) => {
             const { questionIndex, answer } = action.payload;
-            state.userAnswers[questionIndex] = answer //don't understand this logic
+            state.userAnswers[questionIndex] = answer ////////////////
             console.log(answer);
         },
         nextQuestion: (state) => {
-            // why use -1 
+            // //////////////
             if (state.currentQuestionIndex < state.question.length - 1) {
                 state.currentQuestionIndex += 1
 
@@ -40,8 +54,11 @@ export const quizSlice = createSlice({
         },
         completeQuiz: (state) => {
             state.quizComplete = true
+        },
+        setQuiz: (state, action) => {
+            state.question = action.payload
         }
     }
 })
 
-export const { setAnswer, nextQuestion, previousQuestion } = quizSlice.actions
+export const { setAnswer, nextQuestion, previousQuestion, completeQuiz, setQuiz } = quizSlice.actions

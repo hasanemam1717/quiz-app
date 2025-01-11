@@ -21,26 +21,28 @@ const Qustion = () => {
   };
   return (
     <div>
-      <Card className="w-[450px]">
-        <CardTitle>{currentQuestion.question}</CardTitle>
-        <CardDescription>
-          Question: {currentQuestionIndex + 1} of {question.length}
-        </CardDescription>
-        <CardContent className="space-y-2">
-          {currentQuestion.options.map((option, index) => (
-            <Button
-              onClick={() => handleAnswerChange(option)}
-              size={"lg"}
-              className="w-full"
-              key={index}
-              variant={option === currentAnswer ? "default" : "outline"}
-            >
-              {option}{" "}
-            </Button>
-          ))}
-        </CardContent>
-        <QuizControl></QuizControl>
-      </Card>
+      {question.length > 0 && (
+        <Card className="w-[450px] mx-auto p-2">
+          <CardTitle className="text-xl ">{currentQuestion.question}</CardTitle>
+          <CardDescription>
+            Question: {currentQuestionIndex + 1} of {question.length}
+          </CardDescription>
+          <CardContent className="space-y-2">
+            {currentQuestion.options.map((option, index) => (
+              <Button
+                onClick={() => handleAnswerChange(option)}
+                size={"lg"}
+                className="w-full"
+                key={index}
+                variant={option === currentAnswer ? "default" : "outline"}
+              >
+                {option}{" "}
+              </Button>
+            ))}
+          </CardContent>
+          <QuizControl></QuizControl>
+        </Card>
+      )}
     </div>
   );
 };
